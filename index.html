@@ -2,30 +2,50 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calculadora Magic Number</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+  <header class="topbar">
+    <div class="logo">MagicNumber💡</div>
+    <nav>
+      <button class="tab-button active" onclick="abrirAba('calculadora', event)">Calculadora</button>
+      <button class="tab-button" onclick="abrirAba('historico', event)">Histórico</button>
+    </nav>
+  </header>
 
-<div class="container">
-  <h1>Magic Number</h1>
+  <main>
+    <section id="calculadora" class="tab-content active card">
+      <h1>Calculadora Magic Number</h1>
 
-  <label for="valorCota">Valor da Cota (R$):</label>
-  <input type="number" id="valorCota" step="0.01" min="0">
+      <label>Nome do Ativo</label>
+      <input type="text" id="nomeAtivo"  />
 
-  <label for="dividendoCota">Dividendo por Cota (R$):</label>
-  <input type="number" id="dividendoCota" step="0.01" min="0">
+      <label>Valor da Cota (R$)</label>
+      <input type="number" id="valorCota"  />
 
-  <button onclick="calcular()">Calcular</button>
+      <label>Dividendo por Cota (R$)</label>
+      <input type="number" id="dividendoCota"  />
 
-  <div class="result" id="resultado" style="display:none;">
-    <p><strong>Quantidade de Cotas Necessárias:</strong> <span id="quantidadeCotas"></span></p>
-    <p><strong>Valor Total Necessário:</strong> R$ <span id="valorTotal"></span></p>
-  </div>
-</div>
+      <div class="botoes">
+        <button onclick="calcular()">Calcular</button>
+        <button class="limparCampos" onclick="limparCampos()">Limpar Campos</button>
+      </div>
 
-<script src="script.js"></script>
+      <div id="resultado" class="result" style="display: none">
+        <p>Quantidade de Cotas: <span id="quantidadeCotas"></span></p>
+        <p>Valor Necessário: R$ <span id="valorTotal"></span></p>
+      </div>
+    </section>
 
+    <section id="historico" class="tab-content card">
+      <h2>Ativos Analisados</h2>
+      <ul id="historicoLista"></ul>
+      <button class="limparHistorico" onclick="limparHistorico()">Limpar Histórico</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
