@@ -3,6 +3,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f4f6f8;
   color: #333;
+  padding-bottom: 100px; /* aumente para garantir espaço para o footer */
 }
 
 .topbar {
@@ -100,6 +101,11 @@ button:hover {
   font-size: 1rem;
   color: #333;
   border-top: 1px solid #e0e0e0;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  
 }
 
 .footer-link {
@@ -113,7 +119,11 @@ button:hover {
 }
 
 @media (max-width: 600px) {
-  .botoes {
-    flex-direction: column;
+  .footer {
+    font-size: 0.95rem;
+    padding: 16px 0;
+  }
+  body {
+    padding-bottom: 110px; /* ajuste se necessário */
   }
 }
