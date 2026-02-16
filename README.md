@@ -26,7 +26,7 @@ Esse projeto foi construído com:
 
 ## 📌 Sobre o Projeto
 
-Uma calculadora com um toque criativo e temático, pensada para tornar as operações matemáticas básicas mais leves e divertidas. Combina funcionalidade com uma interface diferenciada. 
+Uma ferramenta simples e prática para quem investe em ativos financeiros. O "Magic Number" é aquele número mágico que descobre o quanto você precisa gastar para comprar uma quantidade de ativos onde os proventos recebidos são o suficiente para comprar uma cota inteira do seu ativo preferido.
 
 👉 [Acesse o projeto aqui](https://jonatas-b.github.io/Calculadora-Magic-Number/)  
 
