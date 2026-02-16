@@ -1,65 +1,176 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calculadora Magic Number</title>
-  <link rel="stylesheet" href="style.css"/>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestor de Gastos</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
 
-  <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="icon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="icon/favicon-16x16.png">
-  <link rel="manifest" href="icon/site.webmanifest">
-</head>
-<body>
-  <header class="topbar">
-    <div class="logo">MagicNumber💡</div>
-    <nav>
-      <button class="tab-button active" onclick="abrirAba('calculadora', event)">Calculadora</button>
-      <button class="tab-button" onclick="abrirAba('historico', event)">Histórico</button>
-    </nav>
-  </header>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="icon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="icon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="icon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="icon/site.webmanifest" />
+  </head>
+  <body>
+    <h1>Gerenciador de Gastos</h1>
 
-  <main>
-    <section id="calculadora" class="tab-content active card">
-      <h1>Calculadora Magic Number</h1>
-
-      <label>Nome do Ativo</label>
-      <input type="text" id="nomeAtivo"  />
-
-      <label>Valor da Cota (R$)</label>
-      <input type="number" id="valorCota"  />
-
-      <label>Dividendo por Cota (R$)</label>
-      <input type="number" id="dividendoCota"  />
-
-      <div class="botoes">
-        <button onclick="calcular()">Calcular</button>
-        <button class="limparCampos" onclick="limparCampos()">Limpar Campos</button>
-      </div>
-
-      <div id="resultado" class="result" style="display: none">
-        <p>Quantidade de Cotas: <span id="quantidadeCotas"></span></p>
-        <p>Valor Necessário: R$ <span id="valorTotal"></span></p>
-      </div>
-    </section>
-
-    <section id="historico" class="tab-content card">
-      <h2>Ativos Analisados</h2>
-      <ul id="historicoLista"></ul>
-      <button class="limparHistorico" onclick="limparHistorico()">Limpar Histórico</button>
-    </section>
-  </main>
-
-  <footer class="footer">
-        <p>© 2025 Jônatas Emanuel Batista</p>
-        <p>
-            Dúvidas ou sugestões?
-            <a href="mailto:jonatasemanuelbatista12@gmail.com" class="footer-link">Fale comigo</a>
+    <div id="modalSobre" class="fundoModal">
+      <div class="modal">
+        <div><button onclick="fecharModalSobre();">X</button></div>
+        <p>O Gestor de Gastos é um aplicativo simples para você controlar suas despesas mensais. 
+          <br>Aqui você registra seus gastos do mês, informa o salário e eventuais acréscimos, e acompanha o saldo restante de forma clara. 
+          <br>No começo de cada mês o aplicativo guarda o mês anterior e calcula o saldo final (positivo ou negativo), que é automaticamente somado ao salário do mês seguinte, mantendo seu histórico organizado. 
+          <br>Também é possível ver o histórico selecionando qualquer data e editar ou excluir lançamentos feitos no dia atual. Tudo fica salvo no seu navegador, sem precisar criar conta ou configurar nada.
         </p>
+      </div>
+    </div>
+
+    <button id="sobre" title="Sobre o aplicativo" onclick="abrirModalSobre();"><img src="./icon/android-chrome-512x512.png"></img></button>
+
+    <div id="modalResumoMes" class="fundoModal">
+      <div class="modal">
+        <div><button onclick="fecharModalResumo();">X</button></div>
+        <p>Total restante em relação à renda mensal (%).</p>
+        <div class="circle" id="resumoGrafico"></div>
+        <p id="porcentagemTxt"></p>
+      </div>
+    </div>
+
+    <div class="top-bar">
+      <div id="controleCalculo">
+        <button onclick="abrirModalResumo();"><span id="mesAtual" style="font-weight:600; color:#cbd5e1;"></span></button>
+      </div>
+      <div class="tabs">
+        <button class="tab-btn active" onclick="abrirAba('abaCadastro')">
+          Gerenciador
+        </button>
+        <button class="tab-btn" onclick="abrirAba('abaHistorico')">
+          Histórico
+        </button>
+      </div>
+    </div>
+
+    <div id="abaCadastro" class="aba active">
+      <div class="container">
+        <div class="inputs-lado">
+          <input
+            id="salario"
+            placeholder="Salário Mensal: R$ 0,00"
+          /><br /><br />
+          <input
+            id="acrescimo"
+            placeholder="Acréscimo ao Salário: R$ 0,00"
+          /><br /><br />
+          <!-- Saldo restante fica junto com salário/acréscimo -->
+          <div
+            id="resultado"
+            style="margin-top: 16px; font-weight: bold"
+          ></div>
+        </div>
+        <div class="tabela-lado">
+          <!-- Inputs do produto ficam dentro da própria tabela/área da tabela -->
+          <div class="table-inputs">
+            <input id="produto" placeholder="Produto" />
+            <input
+              id="quantidade"
+              type="number"
+              min="1"
+              value="1"
+              placeholder="Quantidade"
+            />
+            <input id="valor" placeholder="Valor (R$)" />
+            <button onclick="adicionarProduto()">Adicionar</button>
+          </div>
+          <table id="tabelaProdutos">
+            <thead>
+              <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Valor (R$)</th>
+                <th>Data</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Produtos serão adicionados aqui -->
+            </tbody>
+          </table>
+          <div
+            id="totalGastoDia"
+            style="
+              margin-top: 16px;
+              font-weight: bold;
+              color: #0f172a;
+              background: #cbd5e1;
+              border-radius: 8px;
+              padding: 10px 14px;
+              text-align: center;
+            "
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="abaHistorico" class="aba">
+      <div class="container">
+        <div class="tabela-lado">
+          <label for="filtroData">Filtrar por mês:</label>
+          <input type="month" id="filtroData" onchange="filtrarPorData()" />
+          <button class="limpar-filtro-btn" onclick="limparFiltro()">
+            Limpar Filtro
+          </button>
+          <table id="tabelaHistorico">
+            <thead>
+              <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Valor (R$)</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Histórico filtrado será exibido aqui -->
+            </tbody>
+          </table>
+          <div
+            id="infoSaldoHistorico"
+            style="margin-top: 16px; font-size: 18px; font-weight: bold"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>© 2025 Jônatas Emanuel Batista</p>
+      <p>
+        Dúvidas ou sugestões?
+        <a href="mailto:jonatasemanuelbatista12@gmail.com" class="footer-link"
+          >Fale comigo</a
+        >
+      </p>
     </footer>
-
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
-
