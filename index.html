@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora Magic Number</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="icon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="icon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="icon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="icon/site.webmanifest" />
+  </head>
+  <body>
+    <header class="topbar">
+      <button onclick="abrirModal()" class="logo">MagicNumber💡</button>
+      <nav>
+        <button
+          class="tab-button active"
+          onclick="abrirAba('calculadora', event)"
+        >
+          Calculadora
+        </button>
+        <button class="tab-button" onclick="abrirAba('historico', event)">
+          Histórico
+        </button>
+      </nav>
+    </header>
+
+    <div id="modal" class="fundoModal">
+      <div class="modal">
+        <div><button onclick="fecharModal()">X</button></div>
+        <p style="color: #0f172a;">
+          <b>Calculadora Magic Number</b> <br><br> Uma ferramenta simples e prática para quem
+          investe em ativos financeiros. O "Magic Number" é aquele número mágico
+          que descobre quanto você precisa gastar para comprar uma quantidade
+          inteira de cotas do seu ativo preferido.<br><br> Como funciona:<br><br> Insira os
+          dados do seu ativo: nome, valor de cada cota e quanto de dividendo
+          (rendimento) cada cota paga<br> Clique em "Calcular" e a ferramenta
+          descobre:<br> Quantas cotas você consegue comprar com o valor disponível<br>
+          Quanto dinheiro você vai precisar ter no total<br> Veja seu histórico de
+          todas as análises que já fez, diretamente no site<br> Salva tudo
+          automaticamente - quando você volta, seus cálculos anteriores
+          continuam lá<br><br> É como ter um assistente pessoal que faz as contas chatas
+          para você, deixando você livre para tomar as melhores decisões de
+          investimento!
+        </p>
+      </div>
+    </div>
+
+    <main>
+      <section id="calculadora" class="tab-content active card">
+        <h1>Calculadora Magic Number</h1>
+
+        <label>Nome do Ativo</label>
+        <input type="text" id="nomeAtivo" />
+
+        <label>Valor da Cota (R$)</label>
+        <input type="number" id="valorCota" />
+
+        <label>Dividendo por Cota (R$)</label>
+        <input type="number" id="dividendoCota" />
+
+        <div class="botoes">
+          <button onclick="calcular()">Calcular</button>
+          <button class="limparCampos" onclick="limparCampos()">
+            Limpar Campos
+          </button>
+        </div>
+
+        <div id="resultado" class="result" style="display: none">
+          <p>Quantidade de Cotas: <span id="quantidadeCotas"></span></p>
+          <p>Valor Necessário: R$ <span id="valorTotal"></span></p>
+        </div>
+      </section>
+
+      <section id="historico" class="tab-content card">
+        <h2>Ativos Analisados</h2>
+        <ul id="historicoLista"></ul>
+        <button class="limparHistorico" onclick="limparHistorico()">
+          Limpar Histórico
+        </button>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2025 Jônatas Emanuel Batista</p>
+      <p>
+        Dúvidas ou sugestões?
+        <a href="mailto:jonatasemanuelbatista12@gmail.com" class="footer-link"
+          >Fale comigo</a
+        >
+      </p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
