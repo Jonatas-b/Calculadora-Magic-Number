@@ -13,7 +13,7 @@
 ---
 
 <p align="center">
-  <img alt="Demonstração do projeto" src="Projetos para README/Calculadora Magic Number.png" width="100%">
+  <img alt="Demonstração do projeto" src="Projetos para README/Calculadora Magic Number (capa).png" width="100%">
 </p>
 
 ## 🚀 Tecnologias
